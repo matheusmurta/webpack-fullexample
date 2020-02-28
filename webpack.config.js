@@ -10,6 +10,12 @@ const PATHS = {
 }
 
 module.exports = {
+
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000
+  },
   entry: "./src/index.js",
   output: {
     filename: "main.js",
