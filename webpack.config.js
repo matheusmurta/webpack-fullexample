@@ -3,7 +3,7 @@ const glob = require('glob');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const PATHS = {
     src: path.join(__dirname, 'src')
@@ -44,14 +44,15 @@ module.exports = {
         use: [
             { loader: MiniCssExtractPlugin.loader },
             "css-loader",
-            "sass-loader"
+            "sass-loader",
+            'postcss-sass-loader'
           ]
       }
     ]
   },
 
   plugins: [
-    new BundleAnalyzerPlugin(),
+    //new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: "css/[name].css"
     }),
