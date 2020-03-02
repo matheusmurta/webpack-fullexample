@@ -4,12 +4,22 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+
 
 const PATHS = {
     src: path.join(__dirname, 'src')
 }
 
 module.exports = {
+
+  optimization: {
+         splitChunks: {
+         chunks: 'all',
+       },
+      },
+
+ 
 
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -18,8 +28,11 @@ module.exports = {
   },
   entry: "./src/index.js",
   output: {
-    filename: "main.js",
-    path: path.resolve("dist")
+    path: path.join(__dirname, 'dist'),
+  filename: '[name].[chunkhash].bundle.js',
+  chunkFilename: '[name].[chunkhash].bundle.js',
+  publicPath: '/',
+  //;publicPath: './', for node modules 
   },
 
   module: {
@@ -52,6 +65,12 @@ module.exports = {
   },
 
   plugins: [
+
+
+    new MomentLocalesPlugin({
+      localesToKeep: ['pt-br'],
+  }),
+   
     //new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: "css/[name].css"
